@@ -74,7 +74,7 @@ const loadHashParams = async () => {
     })
   
   }
-  
+
   if (hashParams["fileURL"] && previousHashParams?.fileURL !== hashParams["fileURL"]) {
     imgBox.progressBar(false)
     imgBox.loadImage(hashParams["fileURL"])
@@ -227,6 +227,16 @@ imgBox.loadImage = async (url=document.getElementById("imageURLInput").value) =>
   if (!imgBox.viewer) {
     imgBox.viewer = OpenSeadragon(imgBox.default.osdViewerOptions)
     imgBox.viewer.addHandler('animation-finish', imgBox.handlers.viewer.animationFinish)
+    let customButton = new OpenSeadragon.Button({
+      tooltip: 'Download',
+      srcRest: 'https://raw.githubusercontent.com/openseadragon/openseadragon/master/images/button_rest.png',
+      srcGroup: 'https://raw.githubusercontent.com/openseadragon/openseadragon/master/images/button_grouphover.png',
+      srcHover: 'https://raw.githubusercontent.com/openseadragon/openseadragon/master/images/button_hover.png',
+      srcDown: 'https://raw.githubusercontent.com/openseadragon/openseadragon/master/images/button_pressed.png'
+    });
+    imgBox.viewer.addControl(
+        customButton.element, { anchor: OpenSeadragon.ControlAnchor.TOP_LEFT }
+    );
   }
   else {
     imgBox.viewer.close()
