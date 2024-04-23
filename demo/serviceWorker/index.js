@@ -287,6 +287,15 @@ imgBox.changeImage = () => {
   })
 }
 
+imgBox.downloadZoomedImage = () => {
+  const link = document.createElement('a')
+  link.href = imgBox.viewer.drawer.canvas.toDataURL("image/png");
+  link.download = 'TiledPic.png'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
+
 imgBox.addServiceWorker = async () => {
 	if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register(`../../imagebox3.js?tileServerPathSuffix=${tileServerPathSuffix}`, {type: 'classic'})
